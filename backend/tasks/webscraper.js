@@ -2,7 +2,6 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const { table } = require('table');
 
-const url = 'https://www.numerama.com/pop-culture/2134305-world-of-warcraft-promis-blizzard-nabandonnera-pas-le-housing-a-la-prochaine-extension.html';
 
 async function scraper(url){
     try {
@@ -32,7 +31,9 @@ async function scraper(url){
                 !text.toLowerCase().includes('publié par') &&
                 !text.toLowerCase().includes('newsletter') &&
                 !text.toLowerCase().includes('loi du 06/01/1978') &&
-                !text.toLowerCase().includes('J’accepte tout')
+                !text.toLowerCase().includes('J’accepte tout') &&
+                !text.toLowerCase().includes('Gratuitement')&&
+                !text.toLowerCase().includes('se connecter')
                ) {
                 
                 articleContent.push(text);
@@ -41,14 +42,6 @@ async function scraper(url){
         
         texteIntegral = articleContent.join('\n\n');
 
-        let results = [];
-        results.push(['Index', 'article']);
-
-        articleContent.forEach((text, index) => {
-             results.push([index + 1, text]);
-        });
-
-        console.log(table(results));
         const titreNettoye = $('title').text().replace(/[^a-zA-Z0-9]/g, '_').substring(0, 30);
         const fileName = `article_${titreNettoye}.txt`;
         
@@ -61,4 +54,4 @@ async function scraper(url){
     }
 }
 
-scraper(url);
+module.exports = scraper;

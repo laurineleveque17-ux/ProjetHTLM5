@@ -1,4 +1,4 @@
-import scraper from './webscraper.js';
+const scraper = require('./webscraper.js');
 
 const axios = require('axios');
 const mongoose = require('mongoose');
@@ -23,7 +23,7 @@ const ArticleSchema = new mongoose.Schema({
     },
     content:{
         type: String,
-        required: true
+        required: false
     },
     url_originale: {
         type: String,
@@ -65,9 +65,12 @@ async function search_articles() {
         console.log('Articles retrieved successfully:');
         try{
             for (const article of gnewsArticles) {
+            
+            const content = await scraper(article.url);
+
             const newArticle = ArticleModel({
                 title: article.title,
-                content: article.content,
+                content: content,
                 url_originale: article.url,
                 source_nom: article.source.name,
                 date_publication: new Date(article.publishedAt),
@@ -79,6 +82,10 @@ async function search_articles() {
     }
     catch (error) {
         console.error('Error fetching articles:', error);
+    }
+    finally {
+        await mongoose.disconnect();
+        console.log('Déconnexion de MongoDB. Processus terminé.');
     }
 }
 
