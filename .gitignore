@@ -1,0 +1,14 @@
+# Dépendances du projet Node.js
+/node_modules
+
+# Fichiers de log et de cache
+npm-debug.log
+yarn-error.log
+.DS_Store # Fichier de métadonnées macOS
+
+# Fichiers d'environnement et secrets
+.env
+
+# Dossiers de build/compilation (si vous utilisez React/Next.js plus tard)
+/dist
+/build
