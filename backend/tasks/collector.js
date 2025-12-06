@@ -1,9 +1,13 @@
 const axios = require('axios');
 const mongoose = require('mongoose');
+const path = require('path');
 
-MONGO_URI="mongodb+srv://noehebel_db_user:sagisagi@dbusers.z5cx5wu.mongodb.net/?appName=DBUsers"
-const GNEWS_API_KEY = '9770224d1d03cfcec269c7d18940d9d8';
-const GNEWS_API_URL = 'https://gnews.io/api/v4/search';
+const rootPath = path.resolve(__dirname, '..', '.env'); 
+require('dotenv').config({ path: rootPath });
+
+const MONGO_URI = process.env.MONGO_URI; 
+const GNEWS_API_URL = process.env.GNEWS_API_URL;
+const GNEWS_API_KEY = process.env.GNEWS_API_KEY;
 
 const ArticleSchema = new mongoose.Schema({
     
