@@ -1,0 +1,16 @@
+# 1. Dépendances et cache
+/node_modules
+/npm-debug.log
+.DS_Store
+
+# 2. Fichiers de build/compilation
+/dist
+/build
+/out
+
+# 3. Fichiers d'environnement et secrets (CRUCIAL pour la sécurité)
+.env
+.env.local
+
+# 4. Fichiers spécifiques à VS Code (non essentiel au code)
+.vscode/
