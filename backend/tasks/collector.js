@@ -1,3 +1,5 @@
+import scraper from './webscraper.js';
+
 const axios = require('axios');
 const mongoose = require('mongoose');
 const path = require('path');
