@@ -17,24 +17,4 @@
 
 # Fichiers spécifiques à VS Code
 .vscode/
-=======
-# Dépendances Node.js
-/node_modules
-/npm-debug.log
-/yarn-error.log
 
-# Fichiers de cache et système
-.DS_Store
-
-# Fichiers de build/compilation (pour le front-end ou la production)
-/dist
-/build
-/out
-
-# Fichiers d'environnement et secrets (CRUCIAL pour la sécurité)
-.env
-.env.local
-
-# Fichiers spécifiques à VS Code
-.vscode/
->>>>>>> feature/webscraper
