@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion & Inscription - Info5</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <header>
+        <img id="logo" src="https://i.ibb.co/s97ssPHP/Chat-GPT-Image-28-nov-2025-14-43-31.png" alt="Logo Info5">
+        <h1>Info5 - Espace Membre</h1>
+        <a href="index.html" class="btn-connexion">Retour au site</a>
+    </header>
+
+    <main id="auth-main-container">
+        
+        <div class="auth-box connexion-box">
+            <div id="login-header">
+                <h2>Connexion</h2>
+            </div>
+            
+            <form id="connexion-form">
+                <div class="form-group">
+                    <label for="identifiant">Email</label>
+                    <input type="text" id="identifiant" name="identifiant" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="motdepasse">Mot de passe</label>
+                    <input type="password" id="motdepasse" name="motdepasse" required>
+                </div>
+                
+                <p id="erreur-connexion" class="erreur-message" style="display: none;"></p>
+                <button type="submit" class="btn-submit">Se connecter</button>
+            </form>
+        </div>
+        
+        <div class="auth-box inscription-box">
+            <div id="login-header">
+                <h2>Inscription</h2>
+            </div>
+            
+            <form id="inscription-form">
+                <div class="form-group">
+                    <label for="nom_inscr">Nom</label>
+                    <input type="text" id="nom_inscr" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="prenom_inscr">Prénom</label>
+                    <input type="text" id="prenom_inscr" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="pseudo_inscr">Pseudo</label>
+                    <input type="text" id="pseudo_inscr" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email_inscr">Email</label>
+                    <input type="email" id="email_inscr" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="motdepasse_inscr">Mot de passe</label>
+                    <input type="password" id="motdepasse_inscr" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmation_mdp">Confirmer le mot de passe</label>
+                    <input type="password" id="confirmation_mdp" required>
+                </div>
+                
+                <p id="erreur-inscription" class="erreur-message" style="display: none;"></p>
+                <button type="submit" class="btn-submit">S'inscrire</button>
+            </form>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

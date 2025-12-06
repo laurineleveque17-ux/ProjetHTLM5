@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Profil - Info5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img id="logo" src="https://i.ibb.co/s97ssPHP/Chat-GPT-Image-28-nov-2025-14-43-31.png" alt="Logo">
+        <h1>Profil</h1>
+        <div class="user-info">
+            <img src="https://img.freepik.com/vecteurs-premium/icone-avatar-masculin-personne-inconnue-anonyme-icone-profil-avatar-par-defaut-utilisateur-medias-sociaux-homme-affaires-silhouette-profil-homme-isole-fond-blanc-illustration-vectorielle_735449-120.jpg" alt="Profil" class="avatar-img">
+        </div>
+    </header>
+
+    <main class="profil-layout">
+        <h2>Mes informations personnelles</h2>
+
+        <div class="info-row">
+            <span class="info-label">Nom :</span>
+            <span id="profile-nom">Chargement...</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Prénom :</span>
+            <span id="profile-pnom">Chargement...</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Nom d'utilisateur :</span>
+            <span id="profile-user">Chargement...</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Email :</span>
+            <span id="profile-email">Chargement...</span>
+        </div>
+        
+        <div class="info-row">
+            <span class="info-label">Mot de passe :</span>
+            <div class="password-container">
+                <input type="password" id="password-input" value="******" disabled>
+                
+                <button class="btn-action" onclick="toggleVisibility()" title="Voir">👁️</button>
+                <button class="btn-action" id="btn-edit" onclick="enableEdit()" title="Modifier">✏️</button>
+                <button class="btn-action btn-save hidden" id="btn-save" onclick="savePassword()">OK</button>
+            </div>
+        </div>
+
+        <a href="index.html" class="btn-retour">Retour au site</a>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

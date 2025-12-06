@@ -1,0 +1,471 @@
+/* =========================================
+   1. BASES & UTILITAIRES
+   ========================================= */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* =========================================
+   2. HEADER
+   ========================================= */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    font-size: 1.5em;
+    margin: 0;
+    /* Flex-grow permet au titre de prendre de la place si besoin */
+    flex-grow: 1; 
+    text-align: center; 
+}
+
+#logo {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#recherche {
+    padding: 10px 15px;
+    width: 300px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-size: 0.9em;
+}
+
+/* =========================================
+   3. AUTHENTIFICATION (Header & Boutons)
+   ========================================= */
+#auth-container {
+    min-width: 180px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Le bouton connexion est maintenant souvent une balise <a> */
+.btn-connexion {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+    display: inline-block; /* Important pour les balises <a> */
+    text-align: center;
+}
+
+.btn-connexion:hover {
+    background-color: #0056b3;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid white;
+    object-fit: cover;
+}
+
+.user-menu {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.85em;
+    line-height: 1.4;
+    text-align: right;
+}
+
+.user-menu .user-name {
+    font-weight: bold;
+    color: #fff;
+}
+
+.user-menu a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.btn-logout {
+    background: none;
+    border: none;
+    color: #ff6b6b;
+    cursor: pointer;
+    text-align: right;
+    padding: 0;
+    font-size: 0.9em;
+    text-decoration: underline;
+}
+
+/* =========================================
+   4. NAVIGATION (Filtres Accueil)
+   ========================================= */
+#filtre {
+    background-color: #e0e0e0;
+    padding: 15px 20px;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#filtre button {
+    padding: 8px 16px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 0.95em;
+    transition: all 0.2s;
+}
+
+#filtre button:hover {
+    background-color: #333;
+    color: white;
+    border-color: #333;
+}
+
+/* =========================================
+   5. LAYOUTS (Mise en page)
+   ========================================= */
+/* Accueil */
+main.home-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr; 
+    gap: 30px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Profil */
+main.profil-layout {
+    max-width: 800px;
+    margin: 30px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   6. PUB & ARTICLES (Accueil)
+   ========================================= */
+#pub {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    height: fit-content;
+}
+
+#pub h3 {
+    margin-top: 0;
+    font-size: 1.1em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.annonce-card {
+    display: block;
+    margin-bottom: 20px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fafafa;
+    transition: transform 0.2s;
+}
+
+.annonce-card:hover {
+    transform: scale(1.03);
+}
+
+.annonce-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.annonce-card p {
+    padding: 10px;
+    margin: 0;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+#contenu {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.titre-section {
+    margin-top: 0;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 1.5em;
+}
+
+.actu-card {
+    display: flex;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+    background: #fff;
+    cursor: pointer;
+}
+
+.actu-card:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card-image-container {
+    width: 220px;
+    flex-shrink: 0;
+}
+
+.card-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.card-title {
+    margin: 0 0 10px 0;
+    color: #007bff;
+    font-size: 1.3em;
+}
+
+.card-description {
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; 
+    line-clamp: 3; 
+    overflow: hidden; 
+}
+
+.card-meta {
+    border-top: 1px dashed #eee;
+    padding-top: 10px;
+    font-size: 0.85em;
+    color: #888;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-source {
+    font-weight: bold;
+    color: #555;
+}
+
+/* =========================================
+   7. ELEMENTS PAGE PROFIL
+   ========================================= */
+.profil-layout h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #007BFF;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.info-row:last-of-type {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: bold;
+    color: #555;
+}
+
+.btn-retour {
+    display: block;
+    width: fit-content;
+    margin: 30px auto 0;
+    padding: 12px 25px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background 0.3s;
+    text-align: center;
+}
+
+.btn-retour:hover {
+    background-color: #0056b3;
+}
+
+.password-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#password-input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #f9f9f9;
+    width: 120px;
+}
+
+#password-input.editable {
+    background: white;
+    border-color: #007bff;
+    outline: none;
+}
+
+.btn-action {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 8px;
+    font-size: 1.2em;
+}
+
+.btn-action:hover {
+    background-color: #eee;
+}
+
+.btn-save {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+/* =========================================
+   8. STYLE PAGE CONNEXION
+   ========================================= */
+#auth-main-container {
+    max-width: 900px;
+    margin: 50px auto; 
+    padding: 20px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap; /* Pour mobile */
+}
+
+.auth-box {
+    width: 350px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+#login-header {
+    margin-bottom: 25px;
+}
+
+#login-header h2 {
+    text-align: center;
+    margin: 0;
+    color: #333;
+    font-size: 2em;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+    text-align: left; 
+}
+
+.form-group input { 
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; 
+    font-size: 1em;
+}
+
+.btn-submit {
+    width: 100%; /* Bouton pleine largeur */
+    padding: 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+.erreur-message {
+    color: red;
+    text-align: center;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
