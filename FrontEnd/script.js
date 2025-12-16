@@ -97,9 +97,20 @@ function initAuthPage() {
                 const data = await response.json();
 
                 if (response.ok) {
-                    alert("Inscription réussie !");
-                    window.location.reload();
-                } else {
+                    alert("Inscription réussie ! Vous pouvez maintenant vous connecter.");
+                    
+                    document.getElementById('inscription-form').reset();
+
+                    
+                    const loginEmail = document.getElementById('identifiant');
+                    const loginPass = document.getElementById('motdepasse');
+
+                    if (loginEmail) {
+                        loginEmail.value = email; 
+                        loginPass.focus();        
+                    }
+                }
+                else {
                     errField.textContent = data.msg || "Erreur inscription";
                     errField.style.display = 'block';
                 }
