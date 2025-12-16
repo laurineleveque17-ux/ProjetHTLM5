@@ -238,11 +238,90 @@ async function savePassword() {
     }
 }
 
+
 /* ==========================================================================
-   INIT
+   4. GESTION DES ARTICLES (HOME)
+   ========================================================================== */
+
+// URL de l'API pour les articles
+const API_ARTICLES = "http://127.0.0.1:5000/api/articles";
+
+async function loadArticles() {
+    const container = document.getElementById('contenu');
+    // On vérifie qu'on est bien sur la page d'accueil
+    if (!container) return;
+
+    try {
+        const response = await fetch(API_ARTICLES);
+        const articles = await response.json();
+
+        // On garde le titre "Dernières actus" mais on enlève les articles exemples
+        // On sélectionne tous les articles existants pour les supprimer
+        const existingArticles = container.querySelectorAll('.actu-card');
+        existingArticles.forEach(art => art.remove());
+
+        // Si aucun article n'est trouvé
+        if (articles.length === 0) {
+            const p = document.createElement('p');
+            p.textContent = "Aucun article disponible pour le moment.";
+            container.appendChild(p);
+            return;
+        }
+
+        // On boucle sur chaque article reçu de la BDD
+        articles.forEach(article => {
+            // Création de la carte HTML
+            const card = document.createElement('article');
+            card.className = 'actu-card';
+            
+            // Formatage de la date (ex: 16/12/2025)
+            const dateObj = new Date(article.date_publication);
+            const dateStr = dateObj.toLocaleDateString('fr-FR');
+
+            // On injecte le HTML dynamiquement
+            // Note : On utilise une image par défaut si l'article n'en a pas
+            // (Votre modèle actuel ne semble pas stocker d'image, on met un placeholder)
+            card.innerHTML = `
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/200x150?text=News" alt="Image Article">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">${article.title}</h3>
+                    <p class="card-description">${article.resume || article.content || "Pas de résumé disponible."}</p>
+                    <div class="card-meta">
+                        <span class="card-source">Source: ${article.source_nom || 'Inconnue'}</span>
+                        <span class="card-date">Le ${dateStr}</span>
+                    </div>
+                     <div class="card-actions">
+                        <span>❤️ ${article.reaction_count || 0}</span>
+                        <span>💬 ${article.comment_count || 0}</span>
+                    </div>
+                </div>
+            `;
+            
+            // Optionnel : Rendre la carte cliquable vers le lien original
+            card.addEventListener('click', () => {
+                window.open(article.url_originale, '_blank');
+            });
+
+            container.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error("Erreur chargement articles:", error);
+        const p = document.createElement('p');
+        p.style.color = "red";
+        p.textContent = "Impossible de charger les articles.";
+        container.appendChild(p);
+    }
+}
+
+/* ==========================================================================
+   INIT (Mise à jour)
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
     updateDisplay();
     initAuthPage();
     initProfilePage();
+    loadArticles(); // <--- 💡 AJOUTEZ CET APPEL ICI
 });
