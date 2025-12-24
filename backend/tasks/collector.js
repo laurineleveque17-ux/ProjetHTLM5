@@ -1,6 +1,6 @@
 const scraper = require('./webscraper.js');
 const summarizeArticle = require('./summarizer.js');
-
+const cron = require('node-cron');
 const axios = require('axios');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -105,5 +105,8 @@ async function search_articles() {
         console.log('Déconnexion de MongoDB. Processus terminé.');
     }
 }
+cron.schedule('*/5 * * * *', () => {
+  console.log('searching articles...');
+  search_articles();
+});
 
-search_articles();
