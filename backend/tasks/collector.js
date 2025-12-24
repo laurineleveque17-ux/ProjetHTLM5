@@ -4,6 +4,7 @@ const cron = require('node-cron');
 const axios = require('axios');
 const mongoose = require('mongoose');
 const path = require('path');
+const ArticleModel = require('../models/Article');
 
 const rootPath = path.resolve(__dirname, '..', '.env'); 
 require('dotenv').config({ path: rootPath });
@@ -12,43 +13,8 @@ const MONGO_URI = process.env.MONGO_URI;
 const GNEWS_API_URL = process.env.GNEWS_API_URL;
 const GNEWS_API_KEY = process.env.GNEWS_API_KEY;
 
-const ArticleSchema = new mongoose.Schema({
-    
-    title: {
-        type: String,
-        required: true,
-    },
-    resume: {
-        type: String,
-        required: false
-    },
-    content:{
-        type: String,
-        required: false
-    },
-    url_originale: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    source_nom: {
-        type: String,
-    },
-    date_publication: {
-        type: Date,
-        required: true,
-    },
-    reaction_count: {
-        type: Number,
-        default: 0
-    }
-}, { timestamps: true }); 
-
-const ArticleModel = mongoose.model('Article', ArticleSchema);
-
 async function search_articles() {
 
-    await mongoose.connect(MONGO_URI);
     await ArticleModel.deleteMany({});
     try{
         console.log('Trying to search some articles...');
@@ -101,12 +67,9 @@ async function search_articles() {
         console.error('Error fetching articles:', error);
     }
     finally {
-        await mongoose.disconnect();
-        console.log('Déconnexion de MongoDB. Processus terminé.');
+        console.log('Processus terminé.');
     }
 }
-cron.schedule('*/5 * * * *', () => {
-  console.log('searching articles...');
-  search_articles();
-});
+
+module.exports = search_articles;
 
