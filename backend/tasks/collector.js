@@ -106,4 +106,4 @@ async function search_articles() {
     }
 }
 
-search_articles();
+search_articles(); 
