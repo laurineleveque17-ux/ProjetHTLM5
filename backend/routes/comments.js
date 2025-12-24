@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware');
 const Comment = require('../models/Comments'); // 💡 Import du modèle Comment
-const Article = require('../models/Articles'); // 💡 Import du modèle Article (pour vérification)
+const Article = require('../models/Article'); // 💡 Import du modèle Article (pour vérification)
 
 // ==========================================================
 // ➡️ ROUTE : POST /api/comments/:articleId

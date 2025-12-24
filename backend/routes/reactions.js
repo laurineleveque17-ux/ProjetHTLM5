@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware');
 const Reaction = require('../models/Reactions'); 
-const Article = require('../models/Articles'); 
+const Article = require('../models/Article'); 
 
 // ==========================================================
 // ➡️ ROUTE : POST /api/reactions/:articleId (Toggle Like/Unlike)

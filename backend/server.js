@@ -5,6 +5,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const commentsRoutes = require('./routes/comments');
 const reactionsRoutes = require('./routes/reactions');
+const articlesRoutes = require('./routes/articles');
 const connectDB = require('./db');
 
 // Charge les variables d'environnement du fichier .env
@@ -26,6 +27,7 @@ app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/api/comments', commentsRoutes);
 app.use('/api/reactions', reactionsRoutes);
+app.use('/api/articles', articlesRoutes);
 
 // Route de test simple (bien pour vérifier que le serveur tourne)
 app.get('/', (req, res) => {
