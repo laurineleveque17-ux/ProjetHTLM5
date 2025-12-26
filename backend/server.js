@@ -7,6 +7,7 @@ const commentsRoutes = require('./routes/comments');
 const reactionsRoutes = require('./routes/reactions');
 const articlesRoutes = require('./routes/articles');
 const connectDB = require('./db');
+const path = require('path');
 
 // Charge les variables d'environnement du fichier .env
 dotenv.config();
@@ -28,10 +29,11 @@ app.use('/api/auth', authRoutes);
 app.use('/api/comments', commentsRoutes);
 app.use('/api/reactions', reactionsRoutes);
 app.use('/api/articles', articlesRoutes);
+app.use(express.static(path.join(__dirname, '..', 'FrontEnd')));
 
 // Route de test simple (bien pour vérifier que le serveur tourne)
 app.get('/', (req, res) => {
-    res.send('Serveur Backend opérationnel.');
+    res.sendFile(path.join(__dirname, '..', 'FrontEnd', 'index.html'));
 });
 
 // Démarre le serveur
