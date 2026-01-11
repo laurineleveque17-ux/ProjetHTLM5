@@ -13,7 +13,7 @@ const MONGO_URI = process.env.MONGO_URI;
 const GNEWS_API_URL = process.env.GNEWS_API_URL;
 const GNEWS_API_KEY = process.env.GNEWS_API_KEY;
 
-async function search_articles() {
+async function search_articles(theme) {
 
     await ArticleModel.deleteMany({});
     try{
@@ -22,7 +22,7 @@ async function search_articles() {
             params: {
                 token: GNEWS_API_KEY,
                 lang: 'fr',
-                q: 'monde',
+                q: theme,
                 max: 10,
                 in: 'title,content',
                 sortby: 'publishedAt'

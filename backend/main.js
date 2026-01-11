@@ -19,14 +19,14 @@ async function main() {
     console.log("Scraper activé");
     cron.schedule('*/5 * * * *', async () => {
         try {
-            await search_articles();
+            await search_articles('monde');
         } catch (err) {
             console.error("Erreur lors du cron :", err);
         }
     });
 
     
-    await search_articles(); 
+    await search_articles('monde'); 
 }
 
 main();
