@@ -29,6 +29,13 @@ const ArticleSchema = new mongoose.Schema({
     reaction_count: {
         type: Number,
         default: 0
+    },
+    dislike_count: {
+         type: Number, 
+         default: 0 
+    },
+    comments:{
+        type : [Object]
     }
 
 }, { timestamps: true }); 

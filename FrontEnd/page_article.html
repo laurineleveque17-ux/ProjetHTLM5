@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails de l'Article</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <header>
+        <button onclick="window.location.href='index.html'">← Retour à l'accueil</button>
+        <h1>Info5 - Détails</h1>
+    </header>
+
+    <main id="article-container">
+        <h1 id="article-title">Chargement...</h1>
+        <div id="article-meta"></div>
+        <div id="article-summary" class="summary-box">
+            <h3>Résumé</h3>
+            <p id="summary-text"></p>
+        </div>
+        
+        <div id="article-content"></div>
+
+        <div class="actions">
+            <button id="source-link" onclick="">Voir la source originale</button>
+        </div>
+
+        <hr>
+
+        <section id="reactions">
+            <h4>Qu'en pensez-vous ?</h4>
+            <button id="like-btn">👍 J'aime (<span id="like-count">0</span>)</button>
+            <button id="dislike-btn">👎 J'aime pas (<span id="dislike-count">0</span>)</button>
+        </section>
+
+        <section id="comments-wrapper">
+            <h3>Commentaires</h3>
+            <div id="comments-list">
+                </div>
+            <form id="comment-form">
+                <textarea id="comment-input" placeholder="Ajouter un commentaire..." required></textarea>
+                <button type="submit">Publier</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="article-script.js"></script>
+</body>
+</html>

@@ -270,42 +270,38 @@ async function loadArticles() {
 
         // On boucle sur chaque article reçu de la BDD
         articles.forEach(article => {
-            // Création de la carte HTML
-            const card = document.createElement('article');
-            card.className = 'actu-card';
-            
-            // Formatage de la date (ex: 16/12/2025)
-            const dateObj = new Date(article.date_publication);
-            const dateStr = dateObj.toLocaleDateString('fr-FR');
+    const card = document.createElement('article');
+    card.className = 'actu-card';
+    
+    // On récupère la date
+    const dateObj = new Date(article.date_publication);
+    const dateStr = dateObj.toLocaleDateString('fr-FR');
 
-            // On injecte le HTML dynamiquement
-            // Note : On utilise une image par défaut si l'article n'en a pas
-            // (Votre modèle actuel ne semble pas stocker d'image, on met un placeholder)
-            card.innerHTML = `
-                <div class="card-image-container">
-                    <img src="https://via.placeholder.com/200x150?text=News" alt="Image Article">
-                </div>
-                <div class="card-content">
-                    <h3 class="card-title">${article.title}</h3>
-                    <p class="card-description">${article.resume || article.content || "Pas de résumé disponible."}</p>
-                    <div class="card-meta">
-                        <span class="card-source">Source: ${article.source_nom || 'Inconnue'}</span>
-                        <span class="card-date">Le ${dateStr}</span>
-                    </div>
-                     <div class="card-actions">
-                        <span>❤️ ${article.reaction_count || 0}</span>
-                        <span>💬 ${article.comment_count || 0}</span>
-                    </div>
-                </div>
-            `;
-            
-            // Optionnel : Rendre la carte cliquable vers le lien original
-            card.addEventListener('click', () => {
-                window.open(article.url_originale, '_blank');
-            });
+    card.innerHTML = `
+        <div class="card-image-container">
+            <img src="https://via.placeholder.com/200x150?text=News" alt="Image Article">
+        </div>
+        <div class="card-content">
+            <h3 class="card-title">${article.title}</h3>
+            <p class="card-description">${article.resume || "Cliquez pour voir le résumé..."}</p>
+            <div class="card-meta">
+                <span class="card-source">Source: ${article.source_nom || 'Inconnue'}</span>
+                <span class="card-date">Le ${dateStr}</span>
+            </div>
+        </div>
+    `;
+    
+    // 🔥 C'EST ICI QUE CA SE JOUE :
+    // On utilise l'ID MongoDB pour rediriger vers notre page intermédiaire
+    // Dans FrontEnd/script.js
+card.addEventListener('click', () => {
+    // On s'assure d'utiliser _id (avec l'underscore pour MongoDB)
+    const articleId = article._id;
+    window.location.href = `page_article.html?id=${articleId}`;
+});
 
-            container.appendChild(card);
-        });
+    container.appendChild(card);
+});
 
     } catch (error) {
         console.error("Erreur chargement articles:", error);
