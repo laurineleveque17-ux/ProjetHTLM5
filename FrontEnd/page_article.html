@@ -6,8 +6,14 @@
     <link rel="stylesheet" href="style.css"> </head>
 <body>
     <header>
-        <button onclick="window.location.href='index.html'">← Retour à l'accueil</button>
-        <h1>Info5 - Détails</h1>
+        <div class="header-side">
+            <a href="index.html" class="btn-back">Retour à l'accueil</a>
+        </div>
+        
+        <h1 class="header-title">Info5 - Détails</h1>
+        
+        <div class="header-side">
+            </div>
     </header>
 
     <main id="article-container">
@@ -21,16 +27,19 @@
         <div id="article-content"></div>
 
         <div class="actions">
-            <button id="source-link" onclick="">Voir la source originale</button>
+            <button id="source-link" class="btn-source">Lire l'article complet ↗</button>
         </div>
 
         <hr>
 
-        <section id="reactions">
-            <h4>Qu'en pensez-vous ?</h4>
-            <button id="like-btn">👍 J'aime (<span id="like-count">0</span>)</button>
-            <button id="dislike-btn">👎 J'aime pas (<span id="dislike-count">0</span>)</button>
-        </section>
+        <div class="reactions">
+            <button id="like-btn" class="reaction-btn like">
+                👍 <span id="like-count">0</span>
+            </button>
+            <button id="dislike-btn" class="reaction-btn dislike">
+                👎 <span id="dislike-count">0</span>
+            </button>
+        </div>
 
         <section id="comments-wrapper">
             <h3>Commentaires</h3>
