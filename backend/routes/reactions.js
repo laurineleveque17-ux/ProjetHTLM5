@@ -7,7 +7,7 @@ const Article = require('../models/Article');
 // ==========================================================
 // ➡️ ROUTE : POST /api/reactions/:articleId (Toggle Like/Unlike)
 // ==========================================================
-router.post('/:articleId', async (req, res) => {
+router.post('/:articleId', authMiddleware, async (req, res) => {
     // Comme on n'a plus le middleware, req.user n'existe pas.
     // On simule un ID d'utilisateur pour que le reste du code fonctionne :
     //const userId = "65a123456789012345678901";

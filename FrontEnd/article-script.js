@@ -17,6 +17,7 @@ async function chargerArticle() {
     }
 
     try {
+        // CORRECTION ICI : On utilise GET sur la route des articles, pas POST sur les réactions
         const response = await fetch(`${BASE_URL}/api/articles/${articleId}`);
         const article = await response.json();
 
@@ -24,10 +25,6 @@ async function chargerArticle() {
             // Textes
             document.getElementById('article-title').textContent = article.title;
             document.getElementById('summary-text').textContent = article.resume || article.content || "Aucun résumé.";
-
-            // Compteurs (utilise les noms exacts de ton modèle backend)
-            document.getElementById('like-count').textContent = article.reaction_count || article.like || 0;
-            document.getElementById('dislike-count').textContent = article.dislike || 0;
 
             // Commentaires
             if (article.comments) {
@@ -40,7 +37,6 @@ async function chargerArticle() {
                 sourceBtn.onclick = () => window.open(article.url_originale, '_blank');
             }
 
-            // Mise à jour visuelle des boutons (couleur)
             majStyleBoutons();
 
         } else {
@@ -111,10 +107,17 @@ function displayComments(comments) {
     comments.forEach(c => {
         const div = document.createElement('div');
         div.className = 'comment-item';
-        const dateStr = c.date ? new Date(c.date).toLocaleString('fr-FR') : "Date inconnue";
+        
+        // On utilise c.pseudo qui est stocké dans ta BDD
+        const auteur = c.pseudo || "Anonyme";
+        const dateStr = new Date(c.createdAt).toLocaleString('fr-FR');
+
         div.innerHTML = `
-            <p>${c.text}</p>
-            <small>Posté le ${dateStr}</small>
+            <div style="margin-bottom: 10px; border-bottom: 1px dashed #eee; padding-bottom: 5px;">
+                <strong style="color: #800020;">${auteur}</strong> 
+                <small style="color: #888; margin-left: 10px;">le ${dateStr}</small>
+                <p style="margin: 5px 0 0 0;">${c.text}</p>
+            </div>
         `;
         list.appendChild(div);
     });
@@ -138,21 +141,36 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const input = document.getElementById('comment-input');
             const text = input.value;
+            const token = localStorage.getItem('token'); // On récupère le jeton ici
+
             if (!text.trim()) return;
+            if (!token) {
+                alert("Vous devez être connecté pour commenter.");
+                return;
+            }
 
             try {
-                const response = await fetch(`${BASE_URL}/api/articles/${articleId}/comment`, {
+                // Correction de l'URL pour pointer vers tes routes de commentaires
+                const response = await fetch(`${BASE_URL}/api/comments/${articleId}`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'x-auth-token': token // Crucial pour que req.user.pseudo existe côté serveur
+                    },
                     body: JSON.stringify({ text: text })
                 });
 
                 if (response.ok) {
                     input.value = '';
-                    chargerArticle(); // Recharge pour voir le nouveau commentaire
+                    // On appelle chargerArticle qui, grâce au point n°1 de mon message précédent, 
+                    // va récupérer les commentaires avec leurs pseudos
+                    chargerArticle(); 
+                } else {
+                    const errorData = await response.json();
+                    alert(errorData.msg || "Erreur lors de l'envoi");
                 }
             } catch (err) {
-                console.error("Erreur commentaire:", err);
+                console.error("Erreur lors de l'envoi :", err);
             }
         };
     }

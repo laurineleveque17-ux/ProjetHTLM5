@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Article = require('../models/Article'); 
+const Comment = require('../models/Comments');
+const Reaction = require('../models/Reactions');
 
 // 1. Route pour TOUS les articles (Page d'accueil)
 router.get('/', async (req, res) => {
@@ -19,9 +21,23 @@ router.get('/:id', async (req, res) => {
     try {
         const article = await Article.findById(req.params.id);
         if (!article) return res.status(404).json({ msg: "Article non trouvé" });
-        res.json(article);
+
+        // 1. On va chercher les commentaires liés à cet article
+        const comments = await Comment.find({ articleId: req.params.id }).sort({ createdAt: -1 });
+
+        // 2. On compte les réactions réelles
+        const likes = await Reaction.countDocuments({ articleId: req.params.id, type: 'like' });
+        const dislikes = await Reaction.countDocuments({ articleId: req.params.id, type: 'dislike' });
+
+        // 3. On renvoie TOUT au frontend
+        res.json({
+            ...article._doc,
+            comments: comments, // On remplace le champ vide par les vrais comms
+            reaction_count: likes,
+            dislike_count: dislikes
+        });
     } catch (err) {
-        res.status(500).json({ msg: "ID invalide" });
+        res.status(500).send('Erreur serveur');
     }
 });
 
