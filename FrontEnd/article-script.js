@@ -9,37 +9,22 @@ const BASE_URL = "http://localhost:5000"; // Vérifie si ton serveur est sur 500
 
 // 1. Fonction principale pour charger l'article
 async function chargerArticle() {
-    console.log("Chargement de l'article :", articleId);
-
-    if (!articleId) {
-        document.getElementById('article-title').textContent = "Erreur : Aucun article sélectionné";
-        return;
-    }
+    if (!articleId) return;
 
     try {
+        // AJOUT DE /id/ ICI 👇
         const response = await fetch(`${BASE_URL}/api/articles/id/${articleId}`);
         const article = await response.json();
 
         if (response.ok) {
-            // Textes
             document.getElementById('article-title').textContent = article.title;
-            document.getElementById('summary-text').textContent = article.resume || article.content || "Aucun résumé.";
-
-            // Commentaires
+            document.getElementById('summary-text').textContent = article.resume || article.content;
+            
+            // Affichage des commentaires (ceux venant de la collection Comments grâce au populate du backend)
             if (article.comments) {
                 displayComments(article.comments);
             }
-
-            // Source
-            const sourceBtn = document.getElementById('source-link');
-            if (article.url_originale && sourceBtn) {
-                sourceBtn.onclick = () => window.open(article.url_originale, '_blank');
-            }
-
             majStyleBoutons();
-
-        } else {
-            document.getElementById('article-title').textContent = "Article introuvable.";
         }
     } catch (error) {
         console.error("Erreur chargement :", error);
@@ -54,7 +39,7 @@ async function envoyerReaction(type) {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/articles/id/${articleId}/react`, {
+        const response = await fetch(`${BASE_URL}/api/reactions/${articleId}`, {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
@@ -149,7 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const response = await fetch(`${BASE_URL}/api/articles/id/${articleId}/comment`, {
+                // Correction de l'URL pour pointer vers tes routes de commentaires
+                const response = await fetch(`${BASE_URL}/api/comments/${articleId}`, {
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json',

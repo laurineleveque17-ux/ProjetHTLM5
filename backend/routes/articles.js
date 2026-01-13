@@ -49,12 +49,12 @@ router.get('/id/:id', async (req, res) => {
             dislike_count: dislikes
         });
     } catch (err) {
-        res.status(400).json({ msg: "ID invalide" });
+        res.status(500).send('Erreur serveur');
     }
 });
 
 // --- 4. INTERACTIONS (Likes/Commentaires) ---
-
+/*
 router.post('/id/:id/react', async (req, res) => {
     try {
         const { type } = req.body;
@@ -87,5 +87,6 @@ router.post('/id/:id/comment', async (req, res) => {
         res.status(500).json({ msg: "Erreur commentaire" });
     }
 });
+*/
 
 module.exports = router;
