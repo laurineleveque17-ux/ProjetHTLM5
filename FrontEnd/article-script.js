@@ -17,8 +17,7 @@ async function chargerArticle() {
     }
 
     try {
-        // CORRECTION ICI : On utilise GET sur la route des articles, pas POST sur les réactions
-        const response = await fetch(`${BASE_URL}/api/articles/${articleId}`);
+        const response = await fetch(`${BASE_URL}/api/articles/id/${articleId}`);
         const article = await response.json();
 
         if (response.ok) {
@@ -55,7 +54,7 @@ async function envoyerReaction(type) {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/reactions/${articleId}`, {
+        const response = await fetch(`${BASE_URL}/api/articles/id/${articleId}/react`, {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
@@ -150,8 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                // Correction de l'URL pour pointer vers tes routes de commentaires
-                const response = await fetch(`${BASE_URL}/api/comments/${articleId}`, {
+                const response = await fetch(`${BASE_URL}/api/articles/id/${articleId}/comment`, {
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json',

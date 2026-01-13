@@ -15,7 +15,6 @@ const GNEWS_API_KEY = process.env.GNEWS_API_KEY;
 
 async function search_articles(theme) {
 
-    await ArticleModel.deleteMany({});
     try{
         console.log('Trying to search some articles...');
         const gnewsResponse = await axios.get(GNEWS_API_URL, {
@@ -32,7 +31,13 @@ async function search_articles(theme) {
         console.log('Articles retrieved successfully:');
         try{
             for (const article of gnewsArticles) {
-            
+                
+                const existingArticle = await ArticleModel.findOne({ url_originale: article.url });
+                if (existingArticle) {
+                    console.log(`Article already exists in the database.`);
+                    continue; 
+                }
+
                 const content = await scraper(article.url);
                 if(content != null){
                     const newArticle = ArticleModel({
@@ -42,6 +47,7 @@ async function search_articles(theme) {
                         url_originale: article.url,
                         source_nom: article.source.name,
                         date_publication: new Date(article.publishedAt),
+                        theme: theme,
                         reaction_count: 0
                     });
                     await newArticle.save();

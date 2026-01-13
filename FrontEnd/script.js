@@ -248,67 +248,77 @@ const API_ARTICLES = "http://127.0.0.1:5000/api/articles";
 
 async function loadArticles() {
     const container = document.getElementById('contenu');
-    // On vérifie qu'on est bien sur la page d'accueil
     if (!container) return;
 
-    try {
-        const response = await fetch(API_ARTICLES);
-        const articles = await response.json();
+    // 1. Détection du thème
+    let path = window.location.pathname;
+    let pageName = path.substring(path.lastIndexOf("/") + 1);
+    let theme = pageName.replace('.html', '').trim().toLowerCase() || 'monde';
+    
+    if (theme === 'index' || theme === "") theme = 'monde';
+    if (theme === 'geopolitique') theme = 'géopolitique';
+    if (theme === 'sante') theme = 'santé';
 
-        // On garde le titre "Dernières actus" mais on enlève les articles exemples
-        // On sélectionne tous les articles existants pour les supprimer
+    console.log("DEBUG : Recherche du thème ->", theme);
+
+    try {
+        const response = await fetch(`${API_ARTICLES}/theme/${theme}`);
+        const data = await response.json();
+
+        // --- SÉCURISATION DU TABLEAU ---
+        // Si le serveur renvoie une erreur ou un objet, on transforme en tableau vide
+        const articles = Array.isArray(data) ? data : [];
+        
+        // Debug pour voir ce que le serveur renvoie réellement
+        if (!Array.isArray(data)) {
+            console.warn("Attention : Le serveur n'a pas renvoyé un tableau. Reçu :", data);
+        }
+
+        // Nettoyage du container
         const existingArticles = container.querySelectorAll('.actu-card');
         existingArticles.forEach(art => art.remove());
 
-        // Si aucun article n'est trouvé
+        // Affichage si vide
         if (articles.length === 0) {
             const p = document.createElement('p');
-            p.textContent = "Aucun article disponible pour le moment.";
+            p.className = "no-articles";
+            p.textContent = `Aucun article disponible pour le thème "${theme}".`;
             container.appendChild(p);
             return;
         }
 
-        // On boucle sur chaque article reçu de la BDD
+        // Boucle sur les articles
         articles.forEach(article => {
-    const card = document.createElement('article');
-    card.className = 'actu-card';
-    
-    // On récupère la date
-    const dateObj = new Date(article.date_publication);
-    const dateStr = dateObj.toLocaleDateString('fr-FR');
+            const card = document.createElement('article');
+            card.className = 'actu-card';
+            
+            const dateObj = new Date(article.date_publication);
+            const dateStr = dateObj.toLocaleDateString('fr-FR');
 
-    card.innerHTML = `
-        <div class="card-image-container">
-            <img src="https://via.placeholder.com/200x150?text=News" alt="Image Article">
-        </div>
-        <div class="card-content">
-            <h3 class="card-title">${article.title}</h3>
-            <p class="card-description">${article.resume || "Cliquez pour voir le résumé..."}</p>
-            <div class="card-meta">
-                <span class="card-source">Source: ${article.source_nom || 'Inconnue'}</span>
-                <span class="card-date">Le ${dateStr}</span>
-            </div>
-        </div>
-    `;
-    
-    // 🔥 C'EST ICI QUE CA SE JOUE :
-    // On utilise l'ID MongoDB pour rediriger vers notre page intermédiaire
-    // Dans FrontEnd/script.js
-card.addEventListener('click', () => {
-    // On s'assure d'utiliser _id (avec l'underscore pour MongoDB)
-    const articleId = article._id;
-    window.location.href = `page_article.html?id=${articleId}`;
-});
+            card.innerHTML = `
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/200x150?text=${theme.toUpperCase()}" alt="Image Article">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">${article.title}</h3>
+                    <p class="card-description">${article.resume || "Cliquez pour voir le résumé..."}</p>
+                    <div class="card-meta">
+                        <span class="card-source">Source: ${article.source_nom || 'Inconnue'}</span>
+                        <span class="card-date">Le ${dateStr}</span>
+                    </div>
+                </div>
+            `;
+            
+            card.addEventListener('click', () => {
+                window.location.href = `page_article.html?id=${article._id}`;
+            });
 
-    container.appendChild(card);
-});
+            container.appendChild(card);
+        });
 
     } catch (error) {
-        console.error("Erreur chargement articles:", error);
-        const p = document.createElement('p');
-        p.style.color = "red";
-        p.textContent = "Impossible de charger les articles.";
-        container.appendChild(p);
+        console.error("Erreur critique chargement articles:", error);
+        container.innerHTML = `<p style="color:red">Erreur de connexion au serveur.</p>`;
     }
 }
 
