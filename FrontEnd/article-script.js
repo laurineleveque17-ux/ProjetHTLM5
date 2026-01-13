@@ -17,7 +17,7 @@ async function chargerArticle() {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/articles/${articleId}`);
+        const response = await fetch(`${BASE_URL}/api/articles/id/${articleId}`);
         const article = await response.json();
 
         if (response.ok) {
@@ -59,7 +59,7 @@ async function envoyerReaction(type) {
     }
 
     try {
-        const response = await fetch(`${BASE_URL}/api/reactions/${articleId}`, {
+        const response = await fetch(`${BASE_URL}/api/articles/id/${articleId}/react`, {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!text.trim()) return;
 
             try {
-                const response = await fetch(`${BASE_URL}/api/articles/${articleId}/comment`, {
+                const response = await fetch(`${BASE_URL}/api/articles/id/${articleId}/comment`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ text: text })

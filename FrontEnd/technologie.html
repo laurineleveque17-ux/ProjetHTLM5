@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info5 - Actualités</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <img id="logo" src="https://i.ibb.co/s97ssPHP/Chat-GPT-Image-28-nov-2025-14-43-31.png" alt="Logo Info5">
+        </div>
+        
+        <input type="search" id="recherche" placeholder="Recherche...">
+        
+        <div id="auth-container">
+            <div id="view-guest">
+                <a href="connexion.html" class="btn-connexion">Connexion</a>
+            </div>
+
+            <div id="view-user" class="hidden">
+                <div class="user-info">
+                    <img src="https://img.freepik.com/vecteurs-premium/icone-avatar-masculin-personne-inconnue-anonyme-icone-profil-avatar-par-defaut-utilisateur-medias-sociaux-homme-affaires-silhouette-profil-homme-isole-fond-blanc-illustration-vectorielle_735449-120.jpg" alt="Avatar" class="avatar-img">
+                    
+                    <div class="user-menu">
+                        <span class="user-name">Mon Profil</span>
+                        <a href="profil.html">Mes infos</a>
+                        <button onclick="logout()" class="btn-logout">Déconnexion</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav id="filtre">
+        <button>Géopolitique</button>
+        <button>Sports</button>
+        <button>IA et Technologie</button>
+        <button>Jeu vidéo et Pop culture</button>
+        <button>Littérature</button>
+    </nav>
+
+    <main class="home-layout">
+        
+        <aside id="pub">
+            <h3>Annonces & Tendances</h3>
+            <a href="#" target="_blank" class="annonce-card">
+                <img src="https://via.placeholder.com/250x100?text=IMG+1" alt="Pub 1">
+                <p>🔴 Urgent : Il faut boycott Sasha !</p>
+            </a>
+            <a href="#" target="_blank" class="annonce-card">
+                <img src="https://via.placeholder.com/250x100?text=IMG+2" alt="Pub 2">
+                <p>🏆 Axel se fait sucer en live !</p>
+            </a>
+            <a href="#" target="_blank" class="annonce-card">
+                <img src="https://via.placeholder.com/250x100?text=IMG+3" alt="Pub 3">
+                <p>📈 Alexandre : un réel fdp ?</p>
+            </a>
+        </aside>
+
+        <section id="contenu">
+            <h2 class="titre-section">Dernières actus</h2>
+            
+            <article class="actu-card">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/200x150?text=Image+Actu" alt="Image">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Titre neuil</h3>
+                    <p class="card-description">Description vite fait bien fait</p>
+                    <div class="card-meta">
+                        <span class="card-source">Source: T'inquiètes</span>
+                        <span class="card-date">Date: -1200 av J.C</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="actu-card">
+                <div class="card-image-container">
+                    <img src="https://via.placeholder.com/200x150?text=Actu+IA" alt="IA">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">🤖 Lancement d'un nouveau modèle IA</h3>
+                    <p class="card-description">Une brève description expliquant l'importance de ce nouveau modèle et ses implications pour le grand public et l'industrie.</p>
+                    <div class="card-meta">
+                        <span class="card-source">Source: **Tech News**</span>
+                        <span class="card-date">Date: **2 Déc. 2025**</span>
+                    </div>
+                </div>
+            </article>
+
+             </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

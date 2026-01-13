@@ -26,6 +26,10 @@ const ArticleSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
+    theme: {
+        type: String,
+        required: false,
+    },
     reaction_count: {
         type: Number,
         default: 0
