@@ -4,9 +4,6 @@ const Article = require('../models/Article');
 const Comment = require('../models/Comments');
 const Reaction = require('../models/Reactions');
 
-// --- 1. ROUTES FIXES (Sans paramètres variables) ---
-
-// Route pour TOUS les articles (Page d'accueil)
 router.get('/', async (req, res) => {
     try {
         const articles = await Article.find().sort({ date_publication: -1 });
@@ -16,8 +13,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// --- 2. ROUTES THÉMATIQUES (Ex: /api/articles/theme/sport) ---
-// On ajoute "/theme/" devant pour éviter la confusion avec les ID
 router.get('/theme/:theme', async (req, res) => {
     try {
         const articles = await Article.find({ theme: req.params.theme }).sort({ date_publication: -1 });
@@ -27,24 +22,19 @@ router.get('/theme/:theme', async (req, res) => {
     }
 });
 
-// --- 3. ROUTES PAR ID (Ex: /api/articles/id/65a1...) ---
-// On ajoute "/id/" pour être totalement précis et sécurisé
 router.get('/id/:id', async (req, res) => {
     try {
         const article = await Article.findById(req.params.id);
         if (!article) return res.status(404).json({ msg: "Article non trouvé" });
 
-        // 1. On va chercher les commentaires liés à cet article
         const comments = await Comment.find({ articleId: req.params.id }).sort({ createdAt: -1 });
 
-        // 2. On compte les réactions réelles
         const likes = await Reaction.countDocuments({ articleId: req.params.id, type: 'like' });
         const dislikes = await Reaction.countDocuments({ articleId: req.params.id, type: 'dislike' });
 
-        // 3. On renvoie TOUT au frontend
         res.json({
             ...article._doc,
-            comments: comments, // On remplace le champ vide par les vrais comms
+            comments: comments,
             reaction_count: likes,
             dislike_count: dislikes
         });

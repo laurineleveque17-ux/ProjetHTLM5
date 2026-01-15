@@ -37,7 +37,6 @@ header {
 }
 
 #logo {
-    /* On force la taille pour qu'il ne s'étire plus jamais */
     width: 65px !important;
     height: 65px !important;
     min-width: 65px !important;
@@ -46,7 +45,6 @@ header {
 }
 
 #recherche {
-    /* On fixe la barre de recherche au centre */
     flex: 0 0 400px !important;
     padding: 10px 15px !important;
     border-radius: 20px !important;
@@ -69,7 +67,6 @@ header {
     justify-content: flex-end;
 }
 
-/* Le bouton connexion est maintenant souvent une balise <a> */
 .btn-connexion {
     background-color: #007bff;
     color: white;
@@ -79,7 +76,7 @@ header {
     cursor: pointer;
     font-weight: bold;
     transition: background 0.3s;
-    display: inline-block; /* Important pour les balises <a> */
+    display: inline-block; 
     text-align: center;
 }
 
@@ -167,7 +164,6 @@ header {
 /* =========================================
    5. LAYOUTS (Mise en page)
    ========================================= */
-/* Accueil */
 main.home-layout {
     display: grid;
     grid-template-columns: 280px 1fr; 
@@ -177,7 +173,6 @@ main.home-layout {
     margin: 0 auto;
 }
 
-/* Profil */
 main.profil-layout {
     max-width: 800px;
     margin: 30px auto;
@@ -410,7 +405,7 @@ main.profil-layout {
     display: flex;
     gap: 30px;
     justify-content: center;
-    flex-wrap: wrap; /* Pour mobile */
+    flex-wrap: wrap; 
 }
 
 .auth-box {
@@ -456,7 +451,7 @@ main.profil-layout {
 }
 
 .btn-submit {
-    width: 100%; /* Bouton pleine largeur */
+    width: 100%; 
     padding: 12px;
     background-color: #007BFF;
     color: white;
@@ -486,7 +481,6 @@ main.profil-layout {
 ############################################################## */
 
 body {
-    /* Un fond gris très léger pour faire ressortir le blanc */
     background-color: #f0f2f5; 
     margin: 0;
     padding: 0;
@@ -499,8 +493,8 @@ header {
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     display: flex;
     align-items: center;
-    justify-content: center; /* Centre le contenu */
-    position: relative; /* Pour positionner le bouton retour par rapport au header */
+    justify-content: center;
+    position: relative; 
 }
 
 .detail-header {
@@ -509,33 +503,31 @@ header {
     align-items: center !important;
     justify-content: space-between !important;
     height: 80px !important;
-    padding: 0 40px !important; /* Décolle le bouton du bord gauche */
+    padding: 0 40px !important; 
 }
 
 .header-side {
     flex: 1 !important;
     display: flex !important;
-    align-items: center !important; /* Force le centrage vertical du bouton */
-    height: 100% !important;        /* Prend toute la hauteur du header */
+    align-items: center !important; 
+    height: 100% !important;       
 }
 
-/* On pousse le bouton vers la gauche */
 .header-side:first-child {
     justify-content: flex-start !important;
 }
 
-/* On prépare la zone de droite (même si elle est vide) */
 .header-side:last-child {
     justify-content: flex-end !important;
 }
 
 .header-title {
-    flex: 0 0 auto !important; /* Le titre ne bouge pas du centre */
+    flex: 0 0 auto !important;
     margin: 0 !important;
     font-size: 1.5rem !important;
     color: white !important;
     text-align: center !important;
-    white-space: nowrap !important; /* Empêche le titre de revenir à la ligne */
+    white-space: nowrap !important; 
 }
 
 .btn-back {
@@ -546,7 +538,6 @@ header {
     border-radius: 5px !important;
     font-size: 0.9rem !important;
     
-    /* On s'assure qu'aucune marge ne le pousse vers le bas */
     margin: 0 !important; 
     display: inline-flex !important;
     align-items: center !important;
@@ -574,7 +565,6 @@ main {
     border: 1px solid #e1e4e8;
 }
 
-/* Le Titre : Plus gros et plus gras */
 #article-title {
     font-size: 2.6rem;
     font-weight: 800;
@@ -585,7 +575,6 @@ main {
     padding-bottom: 15px;
 }
 
-/* Le Résumé : on le met un peu en valeur */
 h2 {
     font-size: 1.2rem;
     text-transform: uppercase;
@@ -598,7 +587,7 @@ h2 {
     background-color: #f8f9fa;
     padding: 20px;
     border-radius: 10px;
-    border-left: 5px solid #800020; /* Rappel du bordeaux sur le résumé */
+    border-left: 5px solid #800020;
     margin: 30px 0;
 }
 
@@ -615,7 +604,6 @@ h2 {
     text-align: justify;
 }
 
-/* Les Boutons de Réaction : On les rend plus interactifs */
 .reactions {
     display: flex;
     gap: 15px;
@@ -645,18 +633,17 @@ h2 {
 
 
 .reaction-btn.active.like {
-    background-color: #d4edda !important; /* Vert clair */
+    background-color: #d4edda !important; 
     border-color: #28a745 !important;
     color: #155724 !important;
 }
 
 .reaction-btn.active.dislike {
-    background-color: #f8d7da !important; /* Rouge clair */
+    background-color: #f8d7da !important; 
     border-color: #dc3545 !important;
     color: #721c24 !important;
 }
 
-/* Les Commentaires : Style "Bulles" légères */
 #comments-wrapper h3 {
     margin-top: 40px;
     font-size: 1.6rem;
@@ -665,7 +652,6 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* Petit liseré décoratif à gauche des commentaires pour plus de structure */
 .comment-item {
     border-left: 6px solid #3498db;
     background-color: #f8f9fa;
@@ -683,12 +669,11 @@ h2 {
 }
 
 .comment-item small {
-    display: block; /* Force la date à aller à la ligne */
+    display: block; 
     color: #888;
     font-size: 0.8rem;
 }
 
-/* Le formulaire */
 #comment-input {
     width: 100%;
     border: 2px solid #eee;
@@ -722,7 +707,7 @@ h2 {
 .btn-back {
     display: inline-block;
     text-decoration: none;
-    background-color: #800020; /* Rouge Bordeaux */
+    background-color: #800020; 
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
@@ -737,13 +722,13 @@ h2 {
 }
 
 .btn-back:hover {
-    background-color: #a50029; /* Un bordeaux un peu plus clair au survol */
+    background-color: #a50029; 
     box-shadow: 0 4px 12px rgba(128, 0, 32, 0.3);
-    transform: translateY(-2px); /* Petit effet de levier */
+    transform: translateY(-2px); 
 }
 
 .btn-back:active {
-    transform: translateY(0); /* S'enfonce quand on clique */
+    transform: translateY(0); 
 }
 
 .btn-source {

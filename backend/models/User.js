@@ -9,7 +9,6 @@ const UserSchema = new mongoose.Schema({
         type : String,
         required:true
     },
-    // 💡 Pour ajouter un nouveau champ :
     pseudo: {
         type: String,
         required: true,

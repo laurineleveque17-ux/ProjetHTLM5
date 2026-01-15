@@ -5,22 +5,19 @@
 const urlParams = new URLSearchParams(window.location.search);
 const articleId = urlParams.get('id');
 const token = localStorage.getItem('token');
-const BASE_URL = "http://localhost:5000"; // Vérifie si ton serveur est sur 5000 ou 3000 !
+const BASE_URL = "http://localhost:5000"; 
 
 // 1. Fonction principale pour charger l'article
 async function chargerArticle() {
     if (!articleId) return;
 
     try {
-        // AJOUT DE /id/ ICI 👇
         const response = await fetch(`${BASE_URL}/api/articles/id/${articleId}`);
         const article = await response.json();
 
         if (response.ok) {
             document.getElementById('article-title').textContent = article.title;
             document.getElementById('summary-text').textContent = article.resume || article.content;
-            
-            // Affichage des commentaires (ceux venant de la collection Comments grâce au populate du backend)
             if (article.comments) {
                 displayComments(article.comments);
             }
@@ -56,7 +53,7 @@ async function envoyerReaction(type) {
             } else {
                 localStorage.setItem(`voted_${articleId}`, type);
             }
-            chargerArticle(); // On recharge les chiffres
+            chargerArticle();
         } else {
             alert(data.msg || "Erreur lors du vote");
         }
@@ -73,11 +70,9 @@ function majStyleBoutons() {
 
     if (!likeBtn || !dislikeBtn) return;
 
-    // Reset des styles
     likeBtn.classList.remove('active');
     dislikeBtn.classList.remove('active');
 
-    // Applique la classe active selon le vote stocké
     if (votedType === 'like') likeBtn.classList.add('active');
     if (votedType === 'dislike') dislikeBtn.classList.add('active');
 }
@@ -92,7 +87,6 @@ function displayComments(comments) {
         const div = document.createElement('div');
         div.className = 'comment-item';
         
-        // On utilise c.pseudo qui est stocké dans ta BDD
         const auteur = c.pseudo || "Anonyme";
         const dateStr = new Date(c.createdAt).toLocaleString('fr-FR');
 
@@ -111,21 +105,19 @@ function displayComments(comments) {
 document.addEventListener('DOMContentLoaded', () => {
     chargerArticle();
 
-    // Liaison des boutons
     const likeBtn = document.getElementById('like-btn');
     const dislikeBtn = document.getElementById('dislike-btn');
     
     if (likeBtn) likeBtn.onclick = () => envoyerReaction('like');
     if (dislikeBtn) dislikeBtn.onclick = () => envoyerReaction('dislike');
 
-    // Formulaire de commentaire
     const commentForm = document.getElementById('comment-form');
     if (commentForm) {
         commentForm.onsubmit = async (e) => {
             e.preventDefault();
             const input = document.getElementById('comment-input');
             const text = input.value;
-            const token = localStorage.getItem('token'); // On récupère le jeton ici
+            const token = localStorage.getItem('token'); 
 
             if (!text.trim()) return;
             if (!token) {
@@ -134,20 +126,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                // Correction de l'URL pour pointer vers tes routes de commentaires
                 const response = await fetch(`${BASE_URL}/api/comments/${articleId}`, {
                     method: 'POST',
                     headers: { 
                         'Content-Type': 'application/json',
-                        'x-auth-token': token // Crucial pour que req.user.pseudo existe côté serveur
+                        'x-auth-token': token 
                     },
                     body: JSON.stringify({ text: text })
                 });
 
                 if (response.ok) {
                     input.value = '';
-                    // On appelle chargerArticle qui, grâce au point n°1 de mon message précédent, 
-                    // va récupérer les commentaires avec leurs pseudos
                     chargerArticle(); 
                 } else {
                     const errorData = await response.json();
