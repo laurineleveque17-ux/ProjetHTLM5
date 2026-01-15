@@ -15,7 +15,7 @@ async function main() {
 
     // 2. Lancement du Cron
     console.log("Scraper activé");
-    cron.schedule('*/30 * * * *', async () => {
+    cron.schedule('* */18 * * *', async () => {
         await ArticleModel.deleteMany({});
         try {
             await search_articles('monde');
