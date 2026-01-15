@@ -1,10 +1,10 @@
 # 📡 5News : L'essentiel de l'info en 5 minutes
 
-> **Le concept :** Un agrégateur intelligent qui condense l'actualité mondiale. Grâce à l'IA, nous transformons des flux d'articles complexes en résumés digestes pour vous permettre de rester informé en un clin d'œil.
+ **Le concept :** Un agrégateur intelligent qui condense l'actualité mondiale. Grâce à l'IA, nous transformons des flux d'articles complexes en résumés digestes pour vous permettre de rester informé en un clin d'œil.
 
 ---
 
-## 🛠️ Le Coeur du Projet
+## Le Coeur du Projet
 Notre plateforme repose sur une synergie entre le scraping de données et l'intelligence artificielle :
 
 * **Sourcing via GNews** : Extraction d'articles depuis des sources médiatiques fiables et variées.
@@ -13,24 +13,24 @@ Notre plateforme repose sur une synergie entre le scraping de données et l'inte
 
 ---
 
-## 👥 L'Équipe & Missions
-*Chaque membre a contribué à la résolution des bugs critiques et à la gestion des conflits Git, développant une polyvalence sur l'ensemble de la stack.*
+## L'Équipe & Missions
+*Chaque membre a contribué à la résolution des bugs  et à la gestion des conflits Git, développant une polyvalence certaine.*
 
-* **Baptiste Guicheteau** *Expert API* — Développement des scripts Gnews et OpenAI. Maître d'oeuvre de la logique de récupération et de traitement des données.
-* **Noé Hebel** *Architecte Data* — Gestion de la base de données, sécurisation des connexions utilisateurs et logique des interactions.
-* **Kilian Champin** *Développeur UI/UX* — Design et intégration des pages principales et individuelles. Création des composants d'interaction client.
-* **Laurine Lévêque** *Développeur Frontend* — Conception des interfaces et implémentation des scripts de connexion utilisateur.
+* **Baptiste Guicheteau** Développement des scripts Gnews et OpenAI. Gestion de la logique de récupération et de traitement des données.
+* **Noé Hebel** Gestion de la base de données, sécurisation des connexions utilisateurs et logique des interactions.
+* **Kilian Champin** Design et intégration des pages principales et individuelles. Création des composants d'interaction client.
+* **Laurine Lévêque** Conception des interfaces et implémentation des scripts de connexion utilisateur.
 
 ---
 
-## ⚡ Fonctionnalités Clés
+## Fonctionnalités Clés
 * **🔄 Collecte Automatisée** : Un script `cron` renouvelle l'intégralité des informations toutes les 18 heures sans intervention humaine.
 * **🕒 Alerte de Rotation** : Un système de notification prévient l'utilisateur 5 minutes avant le rafraîchissement des articles pour ne rien manquer.
 * **💬 Espace d'Expression** : Possibilité de commenter et de réagir (Like/Dislike) aux actualités après connexion.
 
 ---
 
-## 🔍 Transparence & Améliorations
+## Transparence & Améliorations
 *Nous restons lucides sur les axes de progression de cette version :*
 
 1.  **Optimisation de la collecte** : Le temps de traitement par l'IA peut rendre certaines catégories momentanément vides lors de la rotation.
@@ -39,14 +39,6 @@ Notre plateforme repose sur une synergie entre le scraping de données et l'inte
 
 ---
 
-## 📦 Lancer 5News en local
+## Lancer 5News 
 
-```bash
-# 1. Installer les dépendances (Backend)
-cd backend && npm install
-
-# 2. Lancer le serveur
-npm start
-
-# 3. Accès
-Ouvrez index.html dans votre navigateur.
+A compléter
