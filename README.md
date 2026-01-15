@@ -1,6 +1,6 @@
 # 📡 5News : L'essentiel de l'info en 5 minutes
 
- **Le concept :** Un agrégateur intelligent qui condense l'actualité mondiale. Grâce à l'IA, nous transformons des flux d'articles complexes en résumés digestes pour vous permettre de rester informé en un clin d'œil.
+ **Le concept :** Un site qui regroupe les dernières informations de l'actualité mondiale. Grâce à l'IA, nous transformons des flux d'articles complexes en résumés digestes pour vous permettre de rester informé en un clin d'œil.
 
 ---
 
