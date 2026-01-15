@@ -126,6 +126,7 @@ function initAuthPage() {
 /* ==========================================================================
    3. PROFIL (RÉCUPÉRATION DES INFOS)
    ========================================================================== */
+
 async function initProfilePage() {
     const inputPass = document.getElementById('password-input');
     // Si pas de champ mot de passe, on n'est pas sur la page profil
@@ -243,6 +244,16 @@ async function savePassword() {
    4. GESTION DES ARTICLES (HOME)
    ========================================================================== */
 
+// Configuration des images par thème
+const THEME_IMAGES = {
+    'monde': 'images/news.jpg',
+    'santé': 'images/sante.png',
+    'géopolitique': 'images/geopolitique.jpg',
+    'culture': 'images/culture.png',
+    'sports': 'images/sport.png',
+    'technologie': 'images/technologie.png'
+};
+
 // URL de l'API pour les articles
 const API_ARTICLES = "http://127.0.0.1:5000/api/articles";
 
@@ -294,10 +305,11 @@ async function loadArticles() {
             
             const dateObj = new Date(article.date_publication);
             const dateStr = dateObj.toLocaleDateString('fr-FR');
+            const imagePath = THEME_IMAGES[theme] || 'images/default-news.jpg';
 
             card.innerHTML = `
                 <div class="card-image-container">
-                    <img src="https://via.placeholder.com/200x150?text=${theme.toUpperCase()}" alt="Image Article">
+                    <img src="${imagePath}" alt="Illustration ${theme}">
                 </div>
                 <div class="card-content">
                     <h3 class="card-title">${article.title}</h3>
@@ -329,5 +341,5 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDisplay();
     initAuthPage();
     initProfilePage();
-    loadArticles(); // <--- 💡 AJOUTEZ CET APPEL ICI
+    loadArticles(); 
 });

@@ -32,7 +32,6 @@ async function main() {
         }
     });
 
-    await ArticleModel.deleteMany({});
     await search_articles('monde');
     await search_articles('technologie');
     await search_articles('culture');
