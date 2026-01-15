@@ -12,7 +12,6 @@ async function chargerArticle() {
     if (!articleId) return;
 
     try {
-        // AJOUT DE /id/ ICI 👇
         const response = await fetch(`${BASE_URL}/api/articles/id/${articleId}`);
         const article = await response.json();
 
@@ -20,7 +19,15 @@ async function chargerArticle() {
             document.getElementById('article-title').textContent = article.title;
             document.getElementById('summary-text').textContent = article.resume || article.content;
             
-            // Affichage des commentaires (ceux venant de la collection Comments grâce au populate du backend)
+            // --- AJOUTE CE BLOC ICI POUR FIXER LE BOUTON SOURCE ---
+            const sourceBtn = document.getElementById('source-link');
+            if (article.url_originale && sourceBtn) {
+                sourceBtn.onclick = () => {
+                    window.open(article.url_originale, '_blank');
+                };
+            }
+            // ------------------------------------------------------
+
             if (article.comments) {
                 displayComments(article.comments);
             }
