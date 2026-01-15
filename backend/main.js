@@ -1,10 +1,9 @@
-// backend/index.js
-
-const app = require('./server'); // Cherche server.js dans le même dossier
+const app = require('./server');
 const search_articles = require('./tasks/collector');
 const cron = require('node-cron');
 const connectDB = require('./db');
 const ArticleModel = require('./models/Article'); 
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function main() {
     // 1. Connexion à la base de données
@@ -15,6 +14,7 @@ async function main() {
     app.listen(PORT, () => {
         console.log(`Serveur lancé sur http://localhost:${PORT}`);
     });
+    
 
     // 3. Lancement du Cron
     console.log("Scraper activé");
