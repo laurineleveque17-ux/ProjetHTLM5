@@ -1,24 +1,44 @@
-# ProjetHTML5 5News
-Ce projet permet de rassembler plusieurs articles de différents médias en utilisant l'API Gnews. Ensuite grâce à l'API de open AI on en fait des résumés lisibles très rapidement. En soit, vous pouvez faire le tour de l'actualité mondiale en 5 minutes et y réagir !
+# 📡 5News : L'essentiel de l'info en 5 minutes
 
-**Membres du projet:** 
-    Baptiste Guicheteau: Développement des scripts en lien avec les API Gnews et OpenAI. Ces scripts gèrent toute la logique de récupération d'article et de traitement. 
-    Noé Hebel: Développement des scripts de communication avec la base de donnée et des scripts de connexion utilisateur et intéractions. 
-    Kilian Champin: Développement des pages principales (HTML/CSS/JS), des pages individuelles d'articles et des intéractions utilisateurs.
-    Laurine Lévêque: Développement des pages principales (HTML/CSS/JS) et des scripts js de connexion utilisateur.
+ **Le concept :** Un agrégateur intelligent qui condense l'actualité mondiale. Grâce à l'IA, nous transformons des flux d'articles complexes en résumés digestes pour vous permettre de rester informé en un clin d'œil.
 
-    Chacun a également dû régler des bugs et des conflits, forçant tout les membres à explorer et modifier des parties qui ne s'inscrivent pas forcément dans le cadre de leurs missions.
+---
 
-**Technologies utilisées:**
-Nous avons travaillé avec différentes API, Gnews et OpenAI.
-De plus notre site fonctionne en nodejs, il y a donc un serveur backend et un serveur frontend. 
+## Le Coeur du Projet
+Notre plateforme repose sur une synergie entre le scraping de données et l'intelligence artificielle :
 
-**Fonctionalités :**
--**Collecte Automatisée** : Toutes les 18 heures le site renouvelle ses informations AUTOMATIQUEMENT grâce à un script cron. Il récupère son contenu depuis un web scrapper et fait ensuite son résumé.
--**Des sources sûres**: L'API Gnews permet de recueillir l'information sur des sites fiables. 
--**Une alerte avant la rotation des articles**: Toutes les 5 minutes avant la rotation des articles l'utilisateur est prévenu.
+* **Sourcing via GNews** : Extraction d'articles depuis des sources médiatiques fiables et variées.
+* **Synthèse OpenAI** : Traitement automatique des textes pour générer des résumés pertinents.
+* **Architecture Node.js** : Une structure Fullstack avec un serveur Backend robuste et une interface Frontend fluide.
 
-**Bugs et améliorations possibles**
--**Collecte longue**: La collecte des articles peut être assez longue, laissant les pages des catégories traitées en dernières vide quelques instants. 
--**Barre recherche**: Bien que présente la barre recherche est inutilisable.
--**Des articles ne correspondant pas totalement aux filtres**: Ayant utilisé la version gratuite de Gnews, sa puissance a été réduite. Ainsi certains articles se retrouvent là où ils ne devraient pas être.
+---
+
+## L'Équipe & Missions
+*Chaque membre a contribué à la résolution des bugs  et à la gestion des conflits Git, développant une polyvalence certaine.*
+
+* **Baptiste Guicheteau** Développement des scripts Gnews et OpenAI. Gestion de la logique de récupération et de traitement des données.
+* **Noé Hebel** Gestion de la base de données, sécurisation des connexions utilisateurs et logique des interactions.
+* **Kilian Champin** Design et intégration des pages principales et individuelles. Création des composants d'interaction client.
+* **Laurine Lévêque** Conception des interfaces et implémentation des scripts de connexion utilisateur.
+
+---
+
+## Fonctionnalités Clés
+* **🔄 Collecte Automatisée** : Un script `cron` renouvelle l'intégralité des informations toutes les 18 heures sans intervention humaine.
+* **🕒 Alerte de Rotation** : Un système de notification prévient l'utilisateur 5 minutes avant le rafraîchissement des articles pour ne rien manquer.
+* **💬 Espace d'Expression** : Possibilité de commenter et de réagir (Like/Dislike) aux actualités après connexion.
+
+---
+
+## Transparence & Améliorations
+*Nous restons lucides sur les axes de progression de cette version :*
+
+1.  **Optimisation de la collecte** : Le temps de traitement par l'IA peut rendre certaines catégories momentanément vides lors de la rotation.
+2.  **Moteur de recherche** : La barre de recherche est présente graphiquement mais nécessite encore l'implémentation de sa logique de filtrage.
+3.  **Précision des filtres** : L'utilisation de la version gratuite de GNews peut parfois entraîner des légers décalages dans la catégorisation des articles.
+
+---
+
+## Lancer 5News 
+
+A compléter
