@@ -17,11 +17,20 @@ async function search_articles(theme) {
 
     try{
         console.log('Trying to search some articles...');
+        let temp = '';
+        if (theme === 'geopolitique') {
+            temp = 'géopolitique';
+        }
+        else if (theme === 'sante') {
+            temp = 'santé';
+        }
+        else { temp = theme; }
+
         const gnewsResponse = await axios.get(GNEWS_API_URL, {
             params: {
                 token: GNEWS_API_KEY,
                 lang: 'fr',
-                q: theme,
+                q: temp,
                 max: 10,
                 in: 'title,content',
                 sortby: 'publishedAt'
@@ -34,7 +43,7 @@ async function search_articles(theme) {
                 
                 const existingArticle = await ArticleModel.findOne({ url_originale: article.url });
                 if (existingArticle) {
-                    console.log(`Article already exists in the database.`);
+                    console.log('Article already exists in the database.');
                     continue; 
                 }
 

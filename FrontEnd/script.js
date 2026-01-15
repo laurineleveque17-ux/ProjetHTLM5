@@ -129,36 +129,31 @@ function initAuthPage() {
 
 async function initProfilePage() {
     const inputPass = document.getElementById('password-input');
-    // Si pas de champ mot de passe, on n'est pas sur la page profil
     if (!inputPass) return;
 
     const token = localStorage.getItem('token');
     
-    // Si pas connecté, on renvoie à l'accueil
     if (!token) {
         window.location.href = "index.html";
         return;
     }
 
     try {
-        // C'EST ICI QU'ON RÉCUPÈRE LES INFOS !
         const response = await fetch(`${API_URL}/me`, {
             method: 'GET',
             headers: { 
                 'Content-Type': 'application/json',
-                'x-auth-token': token // On envoie le badge
+                'x-auth-token': token 
             }
         });
 
         if (response.ok) {
             const user = await response.json();
-            // On remplit les trous dans le HTML
             document.getElementById('profile-nom').textContent = user.nom;
             document.getElementById('profile-pnom').textContent = user.prenom;
             document.getElementById('profile-user').textContent = user.pseudo;
             document.getElementById('profile-email').textContent = user.email;
         } else {
-            // Si le token est périmé
             console.log("Erreur token, déconnexion...");
             logout();
         }
@@ -196,19 +191,17 @@ async function savePassword() {
     const newPassword = field.value;
     const token = localStorage.getItem('token');
 
-    // Petite sécurité : mot de passe vide ?
     if (!newPassword || newPassword.trim() === "") {
         alert("Le mot de passe ne peut pas être vide.");
         return;
     }
 
     try {
-        // ENVOI AU SERVEUR (C'est ça qui rend le changement RÉEL)
         const response = await fetch(`${API_URL}/update`, {
-            method: 'PUT', // On utilise PUT pour une mise à jour
+            method: 'PUT', 
             headers: { 
                 'Content-Type': 'application/json',
-                'x-auth-token': token // On prouve qu'on est connecté
+                'x-auth-token': token 
             },
             body: JSON.stringify({ password: newPassword })
         });
@@ -216,13 +209,10 @@ async function savePassword() {
         const data = await response.json();
 
         if (response.ok) {
-            // C'est bon, la base de données est à jour !
             alert("Mot de passe modifié avec succès !");
 
-            // On met à jour la mémoire locale pour l'affichage
             localStorage.setItem('userPasswordSimulation', newPassword);
 
-            // On reverrouille le champ
             field.disabled = true;
             field.classList.remove('editable');
             field.type = "password";
@@ -244,52 +234,47 @@ async function savePassword() {
    4. GESTION DES ARTICLES (HOME)
    ========================================================================== */
 
-// Configuration des images par thème
 const THEME_IMAGES = {
     'monde': 'images/news.jpg',
-    'santé': 'images/sante.png',
-    'géopolitique': 'images/geopolitique.jpg',
+    'sante': 'images/sante.png',
+    'geopolitique': 'images/geopolitique.jpg',
     'culture': 'images/culture.png',
     'sports': 'images/sport.png',
     'technologie': 'images/technologie.png'
 };
 
-// URL de l'API pour les articles
 const API_ARTICLES = "http://127.0.0.1:5000/api/articles";
 
 async function loadArticles() {
     const container = document.getElementById('contenu');
     if (!container) return;
 
-    // 1. Détection du thème
+    
     let path = window.location.pathname;
     let pageName = path.substring(path.lastIndexOf("/") + 1);
-    let theme = pageName.replace('.html', '').trim().toLowerCase() || 'monde';
+    let theme = pageName.replace('.html', '').trim().toLowerCase() || 'monde';  //Détection du thème
     
     if (theme === 'index' || theme === "") theme = 'monde';
-    if (theme === 'geopolitique') theme = 'géopolitique';
-    if (theme === 'sante') theme = 'santé';
+    if (theme === 'Health') theme = 'sante';
+    if (theme === 'Entertainment') theme = 'culture';
+    if (theme === 'Sports') theme = 'sports';
+    if (theme === 'Technology') theme = 'technologie';
+    if (theme === 'Geopolitics') theme = 'geopolitique';
 
     console.log("DEBUG : Recherche du thème ->", theme);
 
     try {
         const response = await fetch(`${API_ARTICLES}/theme/${theme}`);
         const data = await response.json();
-
-        // --- SÉCURISATION DU TABLEAU ---
-        // Si le serveur renvoie une erreur ou un objet, on transforme en tableau vide
         const articles = Array.isArray(data) ? data : [];
         
-        // Debug pour voir ce que le serveur renvoie réellement
         if (!Array.isArray(data)) {
             console.warn("Attention : Le serveur n'a pas renvoyé un tableau. Reçu :", data);
         }
 
-        // Nettoyage du container
         const existingArticles = container.querySelectorAll('.actu-card');
         existingArticles.forEach(art => art.remove());
 
-        // Affichage si vide
         if (articles.length === 0) {
             const p = document.createElement('p');
             p.className = "no-articles";
@@ -298,7 +283,6 @@ async function loadArticles() {
             return;
         }
 
-        // Boucle sur les articles
         articles.forEach(article => {
             const card = document.createElement('article');
             card.className = 'actu-card';
