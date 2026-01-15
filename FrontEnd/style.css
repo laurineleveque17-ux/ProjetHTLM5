@@ -142,7 +142,7 @@ header {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-#filtre button {
+#filtre .nav-btn {
     padding: 8px 16px;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -151,13 +151,18 @@ header {
     white-space: nowrap;
     font-size: 0.95em;
     transition: all 0.2s;
+
+    text-decoration: none; 
+    color: #333;
+    display: inline-block;
 }
 
-#filtre button:hover {
+#filtre .nav-btn:hover {
     background-color: #333;
     color: white;
     border-color: #333;
 }
+
 
 /* =========================================
    5. LAYOUTS (Mise en page)

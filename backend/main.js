@@ -18,25 +18,38 @@ async function main() {
 
     // 3. Lancement du Cron
     console.log("Scraper activé");
-    cron.schedule('*/10 * * * *', async () => {
+    cron.schedule('*/30 * * * *', async () => {
         await ArticleModel.deleteMany({});
         try {
             await search_articles('monde');
+            await sleep(3000);
             await search_articles('technologie');
+            await sleep(3000);
             await search_articles('culture');
+            await sleep(3000);
             await search_articles('sports');
+            await sleep(3000);
             await search_articles('geopolitique');
+            await sleep(3000);
             await search_articles('sante');
+            setTimeout(() => {
+                alert("Les articles seront mis à jour dans 5 minutes.");
+            }, 25 * 60 * 1000)
         } catch (err) {
             console.error("Erreur lors du cron :", err);
         }
     });
 
     await search_articles('monde');
+    await sleep(3000);
     await search_articles('technologie');
+    await sleep(3000);
     await search_articles('culture');
+    await sleep(3000);
     await search_articles('sports');
+    await sleep(3000);
     await search_articles('geopolitique');
+    await sleep(3000);
     await search_articles('sante');
     
 
