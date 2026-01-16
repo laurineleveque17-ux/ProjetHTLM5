@@ -1,14 +1,14 @@
 # 📡 5News : L'essentiel de l'info en 5 minutes
 
- **Le concept :** Un agrégateur intelligent qui condense l'actualité mondiale. Grâce à l'IA, nous transformons des flux d'articles complexes en résumés digestes pour vous permettre de rester informé en un clin d'œil.
+ **Le concept :** Un site qui regroupe les dernières informations de l'actualité mondiale. Grâce à l'IA, nous transformons des flux d'articles complexes en résumés pertinents pour vous permettre de rester informé en un clin d'œil.
 
 ---
 
 ## Le Coeur du Projet
 Notre plateforme repose sur une synergie entre le scraping de données et l'intelligence artificielle :
 
-* **Sourcing via GNews** : Extraction d'articles depuis des sources médiatiques fiables et variées.
-* **Synthèse OpenAI** : Traitement automatique des textes pour générer des résumés pertinents.
+* **Sourcing via GNews** : Extraction d'articles depuis des sources médiatiques fiables.
+* **Synthèse OpenAI** : Traitement automatique des textes pour générer des résumés efficaces.
 * **Architecture Node.js** : Une structure Fullstack avec un serveur Backend robuste et une interface Frontend fluide.
 
 ---
@@ -31,11 +31,11 @@ Notre plateforme repose sur une synergie entre le scraping de données et l'inte
 ---
 
 ## Transparence & Améliorations
-*Nous restons lucides sur les axes de progression de cette version :*
+*Nous restons conscients des axes de progression de cette version :*
 
 1.  **Optimisation de la collecte** : Le temps de traitement par l'IA peut rendre certaines catégories momentanément vides lors de la rotation.
-2.  **Moteur de recherche** : La barre de recherche est présente graphiquement mais nécessite encore l'implémentation de sa logique de filtrage.
-3.  **Précision des filtres** : L'utilisation de la version gratuite de GNews peut parfois entraîner des légers décalages dans la catégorisation des articles.
+2.  **Moteur de recherche** : La barre de recherche est présente graphiquement mais nécessite encore l'implémentation de sa logique.
+3.  **Précision des filtres** : L'utilisation de la version gratuite de GNews peut parfois entraîner des légers décalages dans la catégorisation des articles dû au bridage de cette version.
 
 ---
 
