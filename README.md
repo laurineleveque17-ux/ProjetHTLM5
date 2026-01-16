@@ -24,8 +24,7 @@ Notre plateforme repose sur une synergie entre le scraping de données et l'inte
 ---
 
 ## Fonctionnalités Clés
-* **🔄 Collecte Automatisée** : Un script `cron` renouvelle l'intégralité des informations toutes les 18 heures sans intervention humaine.
-* **🕒 Alerte de Rotation** : Un système de notification prévient l'utilisateur 5 minutes avant le rafraîchissement des articles pour ne rien manquer.
+* **🔄 Collecte Automatisée** : Un script `cron` renouvelle l'intégralité des informations tous les jours à 00h05 sans intervention humaine.
 * **💬 Espace d'Expression** : Possibilité de commenter et de réagir (Like/Dislike) aux actualités après connexion.
 
 ---
@@ -40,5 +39,19 @@ Notre plateforme repose sur une synergie entre le scraping de données et l'inte
 ---
 
 ## Lancer 5News 
+> **Important** : Toute exécution en mode local nécessite l'accès à notre fichier `.env` dans le dossier backend.
 
-A compléter
+### Sur Windows (Recommandé)
+Le projet est automatisé pour Windows :
+1. Clonez le code source.
+2. Double-cliquez sur le fichier **`Launch.bat`** à la racine.
+3. Le site se lancera seul après environ **1 minute**, laissant le temps au backend et aux dépendances de se stabiliser.
+
+### Sur macOS ou Linux
+Le lancement doit être effectué manuellement :
+1. Ouvrez un terminal dans les dossiers `/backend` et `/backend/tasks` puis exécutez `npm install`.
+2. Lancez le serveur depuis le dossier `/backend` avec la commande `node main.js`.
+3. Ouvrez le fichier `index.html` situé dans le dossier `/frontend`.
+
+### Disponible sur Internet
+Si vous souhaitez utiliser notre site sans rien installer, il est déployé à l'adresse suivante : **[http://92.128.72.137](http://92.128.72.137)**
