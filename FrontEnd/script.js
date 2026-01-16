@@ -236,11 +236,11 @@ async function savePassword() {
 
 const THEME_IMAGES = {
     'monde': 'images/news.jpg',
-    'sante': 'images/sante.png',
-    'geopolitique': 'images/geopolitique.jpg',
-    'culture': 'images/culture.png',
-    'sports': 'images/sport.png',
-    'technologie': 'images/technologie.png'
+    'Health': 'images/sante.png',
+    'Geopolitics': 'images/geopolitique.jpg',
+    'Entertainment': 'images/culture.png',
+    'Sports': 'images/sport.png',
+    'Technology': 'images/technologie.png'
 };
 
 const API_ARTICLES = "http://127.0.0.1:5000/api/articles";
@@ -255,11 +255,11 @@ async function loadArticles() {
     let theme = pageName.replace('.html', '').trim().toLowerCase() || 'monde';  //Détection du thème
     
     if (theme === 'index' || theme === "") theme = 'monde';
-    if (theme === 'Health') theme = 'sante';
-    if (theme === 'Entertainment') theme = 'culture';
-    if (theme === 'Sports') theme = 'sports';
-    if (theme === 'Technology') theme = 'technologie';
-    if (theme === 'Geopolitics') theme = 'geopolitique';
+    if (theme === 'sante') theme = 'Health';
+    if (theme === 'culture') theme = 'Entertainment';
+    if (theme === 'sports') theme = 'Sports';
+    if (theme === 'technologie') theme = 'Technology';
+    if (theme === 'geopolitique') theme = 'Geopolitics';
 
     console.log("DEBUG : Recherche du thème ->", theme);
 

@@ -15,7 +15,7 @@ async function main() {
 
     // 2. Lancement du Cron
     console.log("Scraper activé");
-    cron.schedule('* */18 * * *', async () => {
+    cron.schedule('5 0 * * *', async () => {
         await ArticleModel.deleteMany({});
         try {
             await search_articles('monde');
@@ -29,9 +29,6 @@ async function main() {
             await search_articles('Geopolitics');
             await sleep(3000);
             await search_articles('Health');
-            setTimeout(() => {
-                alert("Les articles seront mis à jour dans 5 minutes.");
-            }, 25 * 60 * 1000)
         } catch (err) {
             console.error("Erreur lors du cron :", err);
         }
